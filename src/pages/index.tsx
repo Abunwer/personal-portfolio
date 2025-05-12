@@ -1,53 +1,73 @@
-import type {ReactNode} from 'react';
-import clsx from 'clsx';
-import Link from '@docusaurus/Link';
+import { ReactNode, useState, useEffect } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import Heading from '@theme/Heading';
-
 import styles from './index.module.css';
 import Sidebar from '../components/Sidebar';
+import Navbar from '../components/Navbar';
 import About from '../components/About';
 import Resume from '../components/Resume';
 import Portfolio from '../components/Portfolio';
 import Blog from '../components/Blog';
-
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
+import Contact from '../components/Contact';
+import { navItems as defaultNavItems } from '../config/portfolio';
 
 export default function Home(): ReactNode {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
+  const [activeTab, setActiveTab] = useState('About');
+  const [navItems, setNavItems] = useState(defaultNavItems);
+  const [showHint, setShowHint] = useState(true);
+
+  // Hide the navigation hint after a while
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowHint(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleTabChange = (tabName: string) => {
+    setActiveTab(tabName);
+    setNavItems(prev => 
+      prev.map(item => ({
+        ...item,
+        active: item.name === tabName
+      }))
+    );
+  };
+
+  // Determine which component to render based on active tab
+  const getActiveComponent = () => {
+    switch (activeTab) {
+      case 'About':
+        return <About />;
+      case 'Resume':
+        return <Resume />;
+      case 'Portfolio':
+        return <Portfolio />;
+      case 'Blog':
+        return <Blog />;
+      case 'Contact':
+        return <Contact />;
+      default:
+        return <About />;
+    }
+  };
+
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
-      {/* <HomepageHeader /> */}
+      title={siteConfig.title}
+      description="Personal Portfolio Template">
+      {showHint && (
+        <div className="nav-hint">
+          Use navigation menu at bottom ↓
+        </div>
+      )}
       <main>
-        <Sidebar/>
+        <Sidebar />
         <div className="main-content">
-          <About />
-          <Resume />
-          <Portfolio/>
-          <Blog/>
+          <Navbar activeTab={activeTab} onTabChange={handleTabChange} navItems={navItems} />
+          {getActiveComponent()}
         </div>
       </main>
     </Layout>

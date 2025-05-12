@@ -1,134 +1,53 @@
-import type { ReactNode } from 'react';
+import React from 'react';
+import { blog } from '../../config/portfolio';
+
+interface BlogPost {
+    image: string;
+    category: string;
+    date: string;
+    title: string;
+    description: string;
+}
 
 export default function Blog() {
     return (
         <>
             <article className="blog" data-page="blog">
-
                 <header>
                     <h2 className="h2 article-title">Blog</h2>
                 </header>
 
                 <section className="blog-posts">
-
                     <ul className="blog-posts-list">
+                        {blog.posts.map((post: BlogPost, index: number) => (
+                            <li className="blog-post-item" key={index}>
+                                <a href="#">
+                                    <figure className="blog-banner-box">
+                                        <img 
+                                            src={post.image} 
+                                            alt={post.title} 
+                                            loading="lazy" 
+                                        />
+                                    </figure>
 
-                        <li className="blog-post-item">
-                            <a href="#">
+                                    <div className="blog-content">
+                                        <div className="blog-meta">
+                                            <p className="blog-category">{post.category}</p>
+                                            <span className="dot"></span>
+                                            <time dateTime={post.date}>{post.date}</time>
+                                        </div>
 
-                                <figure className="blog-banner-box">
-                                    <img src={"img/blog-1.jpg"} alt="Design conferences in 2022" loading="lazy" />
-                                </figure>
+                                        <h3 className="h3 blog-item-title">{post.title}</h3>
 
-                                <div className="blog-content">
-
-                                    <div className="blog-meta">
-                                        <p className="blog-category">Design</p>
-
-                                        <span className="dot"></span>
-
-                                        {/* <time datetime="2022-02-23">Fab 23, 2022</time> */}
+                                        <p className="blog-text">
+                                            {post.description}
+                                        </p>
                                     </div>
-
-                                    <h3 className="h3 blog-item-title">Design conferences in 2022</h3>
-
-                                    <p className="blog-text">
-                                        Veritatis et quasi architecto beatae vitae dicta sunt, explicabo.
-                                    </p>
-
-                                </div>
-
-                            </a>
-                        </li>
-
-                        <li className="blog-post-item">
-                            <a href="#">
-
-                                <figure className="blog-banner-box">
-                                    <img src={"img/blog-2.jpg"} alt="Best fonts every designer" loading="lazy" />
-                                </figure>
-
-                                <div className="blog-content">
-
-                                    <div className="blog-meta">
-                                        <p className="blog-category">Design</p>
-
-                                        <span className="dot"></span>
-
-                                        {/* <time datetime="2022-02-23">Fab 23, 2022</time> */}
-                                    </div>
-
-                                    <h3 className="h3 blog-item-title">Best fonts every designer</h3>
-
-                                    <p className="blog-text">
-                                        Sed ut perspiciatis, nam libero tempore, cum soluta nobis est eligendi.
-                                    </p>
-
-                                </div>
-
-                            </a>
-                        </li>
-
-                        <li className="blog-post-item">
-                            <a href="#">
-
-                                <figure className="blog-banner-box">
-                                    <img src={"img/blog-3.jpg"} alt="Design digest #80" loading="lazy" />
-                                </figure>
-
-                                <div className="blog-content">
-
-                                    <div className="blog-meta">
-                                        <p className="blog-category">Design</p>
-
-                                        <span className="dot"></span>
-
-                                        {/* <time datetime="2022-02-23">Fab 23, 2022</time> */}
-                                    </div>
-
-                                    <h3 className="h3 blog-item-title">Design digest #80</h3>
-
-                                    <p className="blog-text">
-                                        Excepteur sint occaecat cupidatat no proident, quis nostrum exercitationem ullam corporis suscipit.
-                                    </p>
-
-                                </div>
-
-                            </a>
-                        </li>
-
-                        <li className="blog-post-item">
-                            <a href="#">
-
-                                <figure className="blog-banner-box">
-                                    <img src={"img/blog-4.jpg"} alt="UI interactions of the week" loading="lazy" />
-                                </figure>
-
-                                <div className="blog-content">
-
-                                    <div className="blog-meta">
-                                        <p className="blog-category">Design</p>
-
-                                        <span className="dot"></span>
-
-                                        {/* <time datetime="2022-02-23">Fab 23, 2022</time> */}
-                                    </div>
-
-                                    <h3 className="h3 blog-item-title">UI interactions of the week</h3>
-
-                                    <p className="blog-text">
-                                        Enim ad minim veniam, consectetur adipiscing elit, quis nostrud exercitation ullamco laboris nisi.
-                                    </p>
-
-                                </div>
-
-                            </a>
-                        </li>
-
+                                </a>
+                            </li>
+                        ))}
                     </ul>
-
                 </section>
-
             </article>
         </>
     );

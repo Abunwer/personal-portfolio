@@ -1,121 +1,95 @@
-import type { ReactNode } from 'react';
+import React, { useState } from 'react';
 import './styles.module.scss';
+import { profile } from '../../config/portfolio';
+import Icon from '../IconBox';
 
 export default function Sidebar() {
+    const [expanded, setExpanded] = useState(false);
+
+    const toggleSidebar = () => {
+        setExpanded(prev => !prev);
+    };
+
     return (
         <>
-            <aside className="sidebar" data-sidebar>
-
+            <aside className={`sidebar ${expanded ? 'active' : ''}`} data-sidebar>
                 <div className="sidebar-info">
-
                     <figure className="avatar-box">
-                        <img src={"img/my-avatar.png"} alt="Richard hanrick" width="80" />
+                        <img src={profile.avatar} alt={profile.name} width="80" />
                     </figure>
 
                     <div className="info-content">
-                        <h1 className="name" title="Richard hanrick">Richard hanrick</h1>
-
-                        <p className="title">Web developer</p>
+                        <h1 className="name" title={profile.name}>{profile.name}</h1>
+                        <p className="title">{profile.title}</p>
                     </div>
 
-                    <button className="info_more-btn" data-sidebar-btn>
-                        <span>Show Contacts</span>
-
-                        {/* <ion-icon name="chevron-down"></ion-icon> */}
+                    <button className="info_more-btn" data-sidebar-btn onClick={toggleSidebar}>
+                        <span>{expanded ? "Hide Contacts" : "Show Contacts"}</span>
+                        <Icon name="chevron-down" />
                     </button>
-
                 </div>
 
                 <div className="sidebar-info_more">
-
                     <div className="separator"></div>
 
                     <ul className="contacts-list">
-
                         <li className="contact-item">
-
                             <div className="icon-box">
-                                {/* <ion-icon name="mail-outline"></ion-icon> */}
+                                <Icon name="mail-outline" />
                             </div>
 
                             <div className="contact-info">
                                 <p className="contact-title">Email</p>
-
-                                <a href="mailto:richard@example.com" className="contact-link">richard@example.com</a>
+                                <a href={`mailto:${profile.email}`} className="contact-link">{profile.email}</a>
                             </div>
-
                         </li>
 
                         <li className="contact-item">
-
                             <div className="icon-box">
-                                {/* <ion-icon name="phone-portrait-outline"></ion-icon> */}
+                                <Icon name="phone-portrait-outline" />
                             </div>
 
                             <div className="contact-info">
                                 <p className="contact-title">Phone</p>
-
-                                <a href="tel:+12133522795" className="contact-link">+1 (213) 352-2795</a>
+                                <a href={`tel:${profile.phone}`} className="contact-link">{profile.phone}</a>
                             </div>
-
                         </li>
 
                         <li className="contact-item">
-
                             <div className="icon-box">
-                                {/* <ion-icon name="calendar-outline"></ion-icon> */}
+                                <Icon name="calendar-outline" />
                             </div>
 
                             <div className="contact-info">
                                 <p className="contact-title">Birthday</p>
-
-                                {/* <time datetime="1982-06-23">June 23, 1982</time> */}
+                                <time dateTime="1982-06-23">{profile.birthday}</time>
                             </div>
-
                         </li>
 
                         <li className="contact-item">
-
                             <div className="icon-box">
-                                {/* <ion-icon name="location-outline"></ion-icon> */}
+                                <Icon name="location-outline" />
                             </div>
 
                             <div className="contact-info">
                                 <p className="contact-title">Location</p>
-
-                                <address>Sacramento, California, USA</address>
+                                <address>{profile.location}</address>
                             </div>
-
                         </li>
-
                     </ul>
 
                     <div className="separator"></div>
 
                     <ul className="social-list">
-
-                        <li className="social-item">
-                            <a href="#" className="social-link">
-                                {/* <ion-icon name="logo-facebook"></ion-icon> */}
-                            </a>
-                        </li>
-
-                        <li className="social-item">
-                            <a href="#" className="social-link">
-                                {/* <ion-icon name="logo-twitter"></ion-icon> */}
-                            </a>
-                        </li>
-
-                        <li className="social-item">
-                            <a href="#" className="social-link">
-                                {/* <ion-icon name="logo-instagram"></ion-icon> */}
-                            </a>
-                        </li>
-
+                        {profile.social.map((social, index) => (
+                            <li className="social-item" key={index}>
+                                <a href={social.url} className="social-link">
+                                    <Icon name={`logo-${social.name}`} />
+                                </a>
+                            </li>
+                        ))}
                     </ul>
-
                 </div>
-
             </aside>
         </>
     );

@@ -1,0 +1,181 @@
+/**
+ * Custom styles for the personal portfolio
+ */
+
+// Use the base styles (modern approach instead of @import)
+@use './styles.scss' as styles;
+
+// Fix for Docusaurus container to match our portfolio design
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--smoky-black);
+  font-family: var(--ff-poppins);
+}
+
+// Remove Docusaurus default navigation and header, but keep our custom navbar 
+.navbar.navbar--fixed-top {
+  display: none;
+}
+
+.main-wrapper {
+  padding: 0;
+  max-width: none;
+}
+
+// Fix for main content
+main {
+  margin: 15px 12px;
+  margin-bottom: 75px;
+  min-width: 259px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  margin-top: 5%;
+}
+
+// Media queries for responsiveness
+@media (min-width: 580px) {
+  main {
+    margin: 30px;
+    margin-bottom: 60px;
+  }
+
+  .sidebar {
+    position: relative;
+    max-height: 180px;
+  }
+
+  .sidebar.active {
+    max-height: 584px;
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    position: relative;
+    max-width: 1200px;
+    margin-inline: auto;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 25px;
+    flex-direction: row;
+    margin-top: 5%;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 60px;
+    max-height: max-content;
+    height: 100%;
+    margin-bottom: 0;
+    padding-top: 60px;
+    z-index: 1;
+  }
+
+  article {
+    min-height: 100%;
+  }
+
+  .main-content {
+    flex: 1;
+    max-width: 700px;
+    width: 100%;
+  }
+}
+
+// Fix for navbar in mobile mode
+.navbar.docusaurus-navbar {
+  display: none;
+}
+
+// Make our custom navbar visible and more prominent
+.navbar:not(.navbar--fixed-top):not(.docusaurus-navbar) {
+  display: block;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: hsla(240, 1%, 17%, 0.95); // More opaque background
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--jet);
+  border-top: 2px solid var(--orange-yellow-crayola); // Add colored top border
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3); // Add shadow to make it stand out
+  z-index: 5;
+  padding: 5px 0; // Add more padding
+  animation: pulse 2s infinite; // Add a subtle animation
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3); }
+  50% { box-shadow: 0 -4px 15px rgba(245, 193, 67, 0.4); }
+  100% { box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3); }
+}
+
+// Enhance the navbar items
+.navbar-link {
+  color: var(--light-gray);
+  font-size: var(--fs-7) !important; // Slightly larger font
+  padding: 20px 15px !important; // More spacing
+  transition: all 0.3s ease;
+  font-weight: 500; // Slightly bolder
+}
+
+.navbar-link:hover {
+  color: white !important;
+  transform: translateY(-3px);
+}
+
+.navbar-link.active {
+  color: var(--orange-yellow-crayola) !important;
+  font-weight: 600;
+}
+
+// Add a navigation hint
+.nav-hint {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  background: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  opacity: 0.8;
+  animation: fadeOut 5s forwards;
+  z-index: 10;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 0.8; }
+  80% { opacity: 0.8; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+// Fix for portfolio component
+.portfolio .select-list.active {
+  display: block;
+}
+
+// Fix for About modal
+.modal-container.active {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: all;
+}
+
+// Fix for form button
+button[disabled] {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.form-success {
+  color: #4caf50;
+  margin-top: 16px;
+  text-align: center;
+}

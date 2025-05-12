@@ -208,7 +208,7 @@ article {
 
 .icon-box ion-icon { --ionicon-stroke-width: 35px; }
 
-article { display: none; }
+// article { display: none; }
 
 article.active {
   display: block;
@@ -1809,6 +1809,7 @@ textarea.form-input::-webkit-resizer { display: none; }
     justify-content: center;
     align-items: stretch;
     gap: 25px;
+    flex-direction: row;;
   }
 
   .main-content {

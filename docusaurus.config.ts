@@ -5,20 +5,20 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: 'Personal Portfolio',
+  tagline: 'Modern professional portfolio built with Docusaurus',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://your-portfolio-site.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'your-github-username', // Usually your GitHub org/user name.
+  projectName: 'personal-portfolio', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -30,7 +30,10 @@ const config: Config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+  
+  // Required for SCSS support
   plugins: ['docusaurus-plugin-sass'],
+  
   presets: [
     [
       'classic',
@@ -38,9 +41,7 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: 'https://github.com/your-github-username/personal-portfolio/tree/main/',
         },
         blog: {
           showReadingTime: true,
@@ -49,16 +50,10 @@ const config: Config = {
             xslt: true,
           },
           // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
+          editUrl: 'https://github.com/your-github-username/personal-portfolio/tree/main/',
         },
         theme: {
-          customCss: ['./src/scss/styles.scss'],
+          customCss: ['./src/scss/custom.scss'], // Updated to use custom.scss instead of styles.scss
         },
       } satisfies Preset.Options,
     ],
@@ -66,73 +61,25 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    // image: 'img/docusaurus-social-card.jpg',
-    // navbar: {
-    //   title: 'My Site',
-    //   logo: {
-    //     alt: 'My Site Logo',
-    //     src: 'img/logo.svg',
-    //   },
-    //   items: [
-    //     {
-    //       type: 'docSidebar',
-    //       sidebarId: 'tutorialSidebar',
-    //       position: 'left',
-    //       label: 'Tutorial',
-    //     },
-    //     {to: '/blog', label: 'Blog', position: 'left'},
-    //     {
-    //       href: 'https://github.com/facebook/docusaurus',
-    //       label: 'GitHub',
-    //       position: 'right',
-    //     },
-    //   ],
-    // },
-    // footer: {
-    //   style: 'dark',
-    //   links: [
-    //     {
-    //       title: 'Docs',
-    //       items: [
-    //         {
-    //           label: 'Tutorial',
-    //           to: '/docs/intro',
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       title: 'Community',
-    //       items: [
-    //         {
-    //           label: 'Stack Overflow',
-    //           href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-    //         },
-    //         {
-    //           label: 'Discord',
-    //           href: 'https://discordapp.com/invite/docusaurus',
-    //         },
-    //         {
-    //           label: 'X',
-    //           href: 'https://x.com/docusaurus',
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       title: 'More',
-    //       items: [
-    //         {
-    //           label: 'Blog',
-    //           to: '/blog',
-    //         },
-    //         {
-    //           label: 'GitHub',
-    //           href: 'https://github.com/facebook/docusaurus',
-    //         },
-    //       ],
-    //     },
-    //   ],
-    //   copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
-    // },
+    image: 'img/my-avatar.png',
+    
+    // Disable default navigation and footer
+    navbar: {
+      // Hide the navbar
+      hideOnScroll: true,
+      style: 'dark',
+      title: 'Personal Portfolio',
+      logo: {
+        alt: 'Portfolio Logo',
+        src: 'img/logo.ico',
+      },
+      items: [],  // Empty array to remove navbar items
+    },
+    footer: {
+      style: 'dark',
+      copyright: `Copyright © ${new Date().getFullYear()} Personal Portfolio. Built with Docusaurus.`,
+      links: [],  // Empty array to remove footer links
+    },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,

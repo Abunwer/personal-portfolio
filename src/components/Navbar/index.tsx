@@ -1,34 +1,33 @@
-import type { ReactNode } from 'react';
+import React from 'react';
 
-export default function Navbar() {
+interface NavItem {
+    name: string;
+    active: boolean;
+}
+
+interface NavbarProps {
+    activeTab: string;
+    onTabChange: (tabName: string) => void;
+    navItems: NavItem[];
+}
+
+export default function Navbar({ activeTab, onTabChange, navItems }: NavbarProps) {
     return (
         <>
             <nav className="navbar">
-
                 <ul className="navbar-list">
-
-                    <li className="navbar-item">
-                        <button className="navbar-link  active" data-nav-link>About</button>
-                    </li>
-
-                    <li className="navbar-item">
-                        <button className="navbar-link" data-nav-link>Resume</button>
-                    </li>
-
-                    <li className="navbar-item">
-                        <button className="navbar-link" data-nav-link>Portfolio</button>
-                    </li>
-
-                    <li className="navbar-item">
-                        <button className="navbar-link" data-nav-link>Blog</button>
-                    </li>
-
-                    <li className="navbar-item">
-                        <button className="navbar-link" data-nav-link>Contact</button>
-                    </li>
-
+                    {navItems.map((item, index) => (
+                        <li className="navbar-item" key={index}>
+                            <button 
+                                className={`navbar-link ${item.active ? 'active' : ''}`}
+                                data-nav-link
+                                onClick={() => onTabChange(item.name)}
+                            >
+                                {item.name}
+                            </button>
+                        </li>
+                    ))}
                 </ul>
-
             </nav>
         </>
     );
